@@ -115,69 +115,64 @@ class _CustomDropdownPageState extends State<CustomDropdownPage> {
                 _removeOverlay();
               },
             ),
-            Positioned(
-              width: _layerLink.leaderSize!.width,
-              child: CompositedTransformFollower(
-                link: _layerLink,
-                targetAnchor: Alignment.bottomLeft,
-                offset: const Offset(0, 0),
+            CompositedTransformFollower(
+              link: _layerLink,
+              targetAnchor: Alignment.bottomLeft,
+              offset: const Offset(0, 0),
 
-                // targetAnchor: Alignment.topRight,
-                // offset: const Offset(0, 0),
+              // targetAnchor: Alignment.topRight,
+              // offset: const Offset(0, 0),
 
-                // targetAnchor: Alignment.topLeft, // 수치조정 필요
-                // offset: Offset(0, -menuHeight),
+              // targetAnchor: Alignment.topLeft, // 수치조정 필요
+              // offset: Offset(0, -menuHeight),
 
-                // targetAnchor: Alignment.topLeft, // 수치조정 필요
-                // offset: Offset(-_layerLink.leaderSize!.width, 0),
+              // targetAnchor: Alignment.topLeft, // 수치조정 필요
+              // offset: Offset(-_layerLink.leaderSize!.width, 0),
 
-                child: Material(
-                  color: Colors.white,
-                  child: Container(
-                    height: menuHeight,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: ListView.separated(
-                      physics: const ClampingScrollPhysics(),
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      itemCount: _dropdownList.length,
-                      itemBuilder: (context, index) {
-                        return CupertinoButton(
-                          padding: const EdgeInsets.symmetric(horizontal: 14),
-                          pressedOpacity: 1,
-                          minSize: 0,
-                          onPressed: () {
-                            setState(() {
-                              _dropdownValue = _dropdownList.elementAt(index);
-                            });
-                            _removeOverlay();
-                          },
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              _dropdownList.elementAt(index),
-                              style: const TextStyle(
-                                fontSize: 16,
-                                height: 22 / 16,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        );
+              child: Container(
+                width: _layerLink.leaderSize!.width,
+                height: menuHeight,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: ListView.separated(
+                  physics: const ClampingScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  itemCount: _dropdownList.length,
+                  itemBuilder: (context, index) {
+                    return CupertinoButton(
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      pressedOpacity: 1,
+                      minSize: 0,
+                      onPressed: () {
+                        setState(() {
+                          _dropdownValue = _dropdownList.elementAt(index);
+                        });
+                        _removeOverlay();
                       },
-                      separatorBuilder: (context, index) {
-                        return const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: Divider(
-                            color: Colors.grey,
-                            height: 20,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          _dropdownList.elementAt(index),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            height: 22 / 16,
+                            color: Colors.black,
                           ),
-                        );
-                      },
-                    ),
-                  ),
+                        ),
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Divider(
+                        color: Colors.grey,
+                        height: 20,
+                      ),
+                    );
+                  },
                 ),
               ),
             )
