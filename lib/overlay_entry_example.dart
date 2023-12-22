@@ -108,6 +108,18 @@ class _CustomDropdownPageState extends State<CustomDropdownPage> {
         var buttonHeight = _layerLink.leaderSize!.height; // 버튼 높이
         var buttonOffSet = _layerLink.leader!.offset; // 버튼 좌표(왼쪽위 기준)
         var pageHeight = MediaQuery.of(context).size.height; // 화면 높이
+
+        // 화면높이 900
+        // 시작위치 450
+        // 버튼높이 40
+        // 메뉴높이 200
+
+        // 화면높이 = 900
+        // 450 + 20 + 200 = 670
+
+        // 900 - 670 >= 0 // ok
+        // 900 - 670 >= 0 // false
+
         return Stack(
           children: [
             GestureDetector(
