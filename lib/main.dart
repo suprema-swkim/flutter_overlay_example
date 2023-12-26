@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/overlay_entry_example.dart';
+import 'package:flutter_application_2/snackbar_example.dart';
 
 void main() {
   return runApp(
@@ -7,12 +7,15 @@ void main() {
     // const OverlayPortalExampleApp(),
 
     // overlay entry example
-    const OverlayEntryExample(),
+    // const OverlayEntryExample(),
 
     // global overlay example
     // const GlobalLoaderOverlayExampleApp(),
 
+    // toast example
+    const ToastExampleApp(),
+
     // snackbar example
-    // const SnackBarExampleApp(),
+    // const SnackBarDemo(),
   );
 }

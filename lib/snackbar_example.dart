@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class SnackBarExampleApp extends StatelessWidget {
-  const SnackBarExampleApp({super.key});
+class ToastExampleApp extends StatelessWidget {
+  const ToastExampleApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'SnackBar Demo',
+      title: 'Toast Demo',
       home: SnackBarPage(),
     );
   }
@@ -89,15 +89,15 @@ class MyPage extends StatelessWidget {
 class CustomToast {
   static void success(String msg) {
     Fluttertoast.showToast(
-      msg: msg,
-      toastLength: Toast.LENGTH_SHORT,
-      timeInSecForIosWeb: 5,
-      textColor: Colors.black,
-      fontSize: 16.0,
-      webBgColor: "#4FF0B1",
-      gravity: ToastGravity.TOP,
-      webPosition: "right",
-    );
+        msg: msg,
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 5,
+        textColor: Colors.black,
+        fontSize: 16.0,
+        webBgColor: "#4FF0B1",
+        gravity: ToastGravity.TOP,
+        webPosition: "right",
+        webShowClose: true);
   }
 
   static void error(String msg) {
