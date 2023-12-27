@@ -1,7 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class OverlayEntryExample2 extends StatelessWidget {
-  const OverlayEntryExample2({Key? key}) : super(key: key);
+  const OverlayEntryExample2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GlobalLoaderOverlay(
+      useDefaultLoading: false,
+      overlayWidgetBuilder: (progress) {
+        //ignored progress for the moment
+        return Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SpinKitCubeGrid(
+                color: Colors.red,
+                size: 50.0,
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              if (progress != null) Text(progress)
+            ],
+          ),
+        );
+      },
+      child: const MaterialApp(
+        home: OverlayEntryExample2Body(),
+      ),
+    );
+  }
+}
+
+class OverlayEntryExample2Body extends StatelessWidget {
+  const OverlayEntryExample2Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +46,20 @@ class OverlayEntryExample2 extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ElevatedButton(
-              onPressed: () async {
+              onPressed: () {
                 showPopup('기본 정보 등록이 먼저 필요합니다.');
               },
               child: const Text('show popup'),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                context.loaderOverlay.show();
+                await Future.delayed(const Duration(seconds: 3));
+              },
+              child: const Text('show loading'),
             ),
           ],
         ),
@@ -42,16 +86,19 @@ class OverlayWidget extends StatelessWidget {
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.only(top: kToolbarHeight), // 앱 바 높이만큼 여백 추가
-        alignment: Alignment.topCenter, // 시작 포인트 지정(세로)
+        alignment: Alignment.topCenter, // 시작 포인트 지정(세로 영역)
         child: AnimatedList(
           shrinkWrap: true, // 전체 영역 제거(자식크기 영역)
           key: animatedKey,
           initialItemCount: overlayList.length,
           itemBuilder: (context, index, animation) {
-            return BuildItem(
-              item: overlayList[index],
-              animation: animation,
-              index: index,
+            return Container(
+              color: Colors.blue,
+              child: BuildItem(
+                item: overlayList[index],
+                animation: animation,
+                index: index,
+              ),
             );
           },
         ),
@@ -100,6 +147,10 @@ class BuildItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(animation.value);
+    print(animation.status);
+    // 0 , forward >>>
+    // 1 , reverse <<<
     return SizeTransition(
       sizeFactor: animation,
       child: Container(
